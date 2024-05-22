@@ -1,9 +1,9 @@
-
+import Home from "./pages/Home"
 
 const App = () => {
   return (
-    <div className="flex justify-center items-center w-full"> 
-      Hello World
+    <div> 
+      <Home/>
     </div>
   )
 }
