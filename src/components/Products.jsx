@@ -3,7 +3,10 @@ import { popularProducts } from "../data/Data";
 import Product from "./Product";
 
 const Container = styled.div`
-
+    display: flex;
+    padding : 20px;
+    flex-wrap : wrap;
+    justify-content: space-between;
 `;
 
 const Products = () => {
@@ -16,4 +19,4 @@ const Products = () => {
   )
 }
 
-export default Products
+export default Products;
