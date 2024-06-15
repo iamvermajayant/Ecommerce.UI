@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar"
 import Announcements from "../components/Announcements"
 import Newsletter from "../components/Newsletter"
 import Footer from "../components/Footer"
+import { Add, Remove } from "@material-ui/icons"
 
 
 const Container = styled.div`
@@ -74,9 +75,57 @@ const FilterColor = styled.div`
 const FilterSize = styled.select`
     margin-left : 10px;
     padding: 5px;
+    border : 2px solid teal;
+    outline : none;
 `
 
 const FilterSizeOption = styled.option``
+const AddContainer = styled.div`
+    width: 50%;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+
+`
+const AmountContainer = styled.div`
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+`
+const Amount = styled.span`
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    border-radius : 10px;
+    border : 1px solid teal;
+    display: flex;
+`
+
+const Button = styled.button`
+    padding : 15px;
+    border : 2px solid teal;
+    background-color : #fff;
+    cursor: pointer;
+    font-weight: 500;
+
+    &:hover{
+        background-color : #f8f4f4;
+    }
+`
+
+const SignWrapper = styled.div`
+    height : 30px;
+    width : 30px;
+    background-color : #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius : 50%;
+    cursor: pointer;
+    margin : 0px 10px;
+`
+
 
 const Product = () => {
   return (
@@ -109,6 +158,18 @@ const Product = () => {
                         </FilterSize>
                     </Filter>
                 </FilterContainer>
+                <AddContainer>
+                    <AmountContainer>
+                        <SignWrapper>
+                            <Remove/>
+                        </SignWrapper>
+                        <Amount>1</Amount>
+                        <SignWrapper>
+                            <Add/>
+                        </SignWrapper>
+                    </AmountContainer>
+                    <Button>Add to cart</Button>
+                </AddContainer>
             </InfoContainer>
         </Wrapper>
         <Newsletter/>
