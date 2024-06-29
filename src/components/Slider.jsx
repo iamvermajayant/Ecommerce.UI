@@ -4,12 +4,14 @@ import styled from "styled-components";
 import { useState } from "react";
 import {sliderItems} from "../data/Data";
 //import sliderItems from "../data/Slider";
+import { mobile } from "../responsive";
 
 const Container = styled.div`
   height: 100vh;
   width: 100%;
   display: flex;
   overflow : hidden;
+  ${mobile({ display: "none" })}
 `;
 
 const Arrow = styled.div`
