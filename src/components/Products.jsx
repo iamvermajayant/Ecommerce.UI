@@ -47,10 +47,29 @@ const Products = ({ cat, sort, filters }) => {
       );
   }, [cat, filters, products]);
 
+  useEffect(() => {
+    if (sort === "newest") {
+      setFilteredProducts((prev) =>
+        [...prev].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      );
+      console.log(filteredProducts)
+    } else if (sort === "asc") {
+      setFilteredProducts((prev) =>
+        [...prev].sort((a, b) => a.price - b.price)
+      );
+      console.log(filteredProducts)
+    } else {
+      setFilteredProducts((prev) =>
+        [...prev].sort((a, b) => b.price - a.price)
+      );
+    }
+  }, [sort]);
+  
+
   return (
     <Container>
       {console.log(filteredProducts, cat, products)}
-      {filteredProducts.map((item) => (
+      {filteredProducts?.map((item) => (
         <Product item={item} key={item.id} />
       ))}
     </Container>
