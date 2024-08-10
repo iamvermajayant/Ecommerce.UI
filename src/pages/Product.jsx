@@ -134,6 +134,15 @@ const Product = () => {
   const id = location.pathname.split("/")[2];
 
   const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
+
+  const AddQuantityHandler = () => {
+    setQuantity(prev => prev + 1);
+  }
+
+  const RemoveQuantityHandler = () => {
+    if (quantity > 1) setQuantity(prev => prev - 1);
+  }
 
   useEffect(() => {
     const getSingleProduct = async () => {
@@ -173,22 +182,22 @@ const Product = () => {
             <Filter>
               <FilterTitle></FilterTitle>
               <FilterSize>
-                <FilterSizeOption>XS</FilterSizeOption>
-                <FilterSizeOption>S</FilterSizeOption>
-                <FilterSizeOption>M</FilterSizeOption>
-                <FilterSizeOption>L</FilterSizeOption>
-                <FilterSizeOption>XL</FilterSizeOption>
+                {
+                    product?.size?.map((s)=>(
+                        <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                    ))
+                }
               </FilterSize>
             </Filter>
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
               <SignWrapper>
-                <Remove />
+                <Remove onClick={RemoveQuantityHandler} />
               </SignWrapper>
-              <Amount>1</Amount>
+              <Amount>{quantity}</Amount>
               <SignWrapper>
-                <Add />
+                <Add onClick={AddQuantityHandler} />
               </SignWrapper>
             </AmountContainer>
             <Button>Add to cart</Button>
