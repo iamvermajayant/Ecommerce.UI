@@ -52,24 +52,27 @@ const Products = ({ cat, sort, filters }) => {
       setFilteredProducts((prev) =>
         [...prev].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
       );
-      console.log(filteredProducts)
     } else if (sort === "asc") {
       setFilteredProducts((prev) =>
         [...prev].sort((a, b) => a.price - b.price)
       );
-      console.log(filteredProducts)
     } else {
       setFilteredProducts((prev) =>
         [...prev].sort((a, b) => b.price - a.price)
       );
     }
   }, [sort]);
+
+  useEffect(() => {
+    console.log("Filtered Products updated:", filteredProducts);
+  }, [filteredProducts]);
   
 
   return (
     <Container>
-      {console.log(filteredProducts, cat, products)}
-      {filteredProducts?.map((item) => (
+      {cat ? filteredProducts?.map((item) => (
+        <Product item={item} key={item.id} />
+      )): products?.slice(0,10)?.map((item) => (
         <Product item={item} key={item.id} />
       ))}
     </Container>
