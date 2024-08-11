@@ -135,6 +135,8 @@ const Product = () => {
 
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");w
 
   const AddQuantityHandler = () => {
     setQuantity(prev => prev + 1);
@@ -176,15 +178,15 @@ const Product = () => {
             <Filter>
               <FilterTitle>Color</FilterTitle>
               {product?.color?.map((s) => (
-                <FilterColor color={s} key={s} />
+                <FilterColor color={s} key={s} onClick={(e)=>setColor(e.target.value)} />
               ))}
             </Filter>
             <Filter>
               <FilterTitle></FilterTitle>
-              <FilterSize>
+              <FilterSize onChange={(e)=>{setSize(e.target.value)}}> 
                 {
                     product?.size?.map((s)=>(
-                        <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                        <FilterSizeOption key={s} >{s}</FilterSizeOption>
                     ))
                 }
               </FilterSize>
