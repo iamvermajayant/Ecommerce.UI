@@ -159,6 +159,10 @@ const Product = () => {
     getSingleProduct();
   }, [id]);
 
+  const handleClick = () =>{
+    
+  }
+
   return (
     <Container>
       <Navbar />
@@ -202,7 +206,7 @@ const Product = () => {
                 <Add onClick={AddQuantityHandler} />
               </SignWrapper>
             </AmountContainer>
-            <Button>Add to cart</Button>
+            <Button onClick={handleClick}>Add to cart</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
