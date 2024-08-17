@@ -163,6 +163,7 @@ const Product = () => {
   }, [id]);
 
   const handleClick = () =>{
+    console.log("size : ", size);
     dispatch(addProducts({...product, quantity,color , size}))
   }
 
@@ -185,7 +186,7 @@ const Product = () => {
             <Filter>
               <FilterTitle>Color</FilterTitle>
               {product?.color?.map((s) => (
-                <FilterColor color={s} key={s} onClick={(e)=>setColor(e.target.value)} />
+                <FilterColor color={s} key={s} onClick={()=>setColor(s)} />
               ))}
             </Filter>
             <Filter>
