@@ -194,7 +194,7 @@ const Product = () => {
               <FilterSize onChange={(e)=>{setSize(e.target.value)}}> 
                 {
                     product?.size?.map((s)=>(
-                        <FilterSizeOption key={s} >{s}</FilterSizeOption>
+                        <FilterSizeOption value={s} key={s} >{s}</FilterSizeOption>
                     ))
                 }
               </FilterSize>
