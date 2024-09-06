@@ -6,8 +6,9 @@ import Navbar from "../components/Navbar";
 //import { mobile } from "../responsive";
 import { mobile } from "../responsive";
 import { useSelector } from "react-redux";
-import StripeCheckout from 'react-stripe-checkout';
+import {loadStripe} from '@stripe/stripe-js';
 import { useState } from "react";
+
 
 const Container = styled.div``;
 
@@ -157,15 +158,38 @@ const Button = styled.button`
 const Cart = () => {
   const cart = useSelector((state) => state.cart);
   console.log(cart);
-  const [stripeToken, setStripeToken] = useState(null);
+  const KEY = import.meta.env.VITE_API_KEY;
 
-  //const KEY = import.meta.env.REACT_STRIPE_API_KEY;
-  
-  const onToken = (token) => {
-    setStripeToken(token);
+  const makePayment = async () => {
+    const stripe = await loadStripe(KEY);
+
+    const body = {
+      products : cart.products
+    }
+
+    const headers = {
+      "Content-Type":"application/json"
+    }
+
+    const response = await fetch('http://localhost:5000/make-payment',{
+      method : "POST",
+      headers : headers,
+      body : JSON.stringify(body)
+    })
+
+    const session = await response.json();
+    console.log(session);
+
+    const result = stripe.redirectToCheckout({
+      sessionId : session.id
+    })
+
+    if(result.error ){
+      console.log(result.error);
+    }
   }
-
-  console.log(stripeToken);
+  
+  
 
   return (
     <Container>
@@ -232,18 +256,7 @@ const Cart = () => {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
-            <StripeCheckout
-              name="Beyoung"
-              image="https://www.vidhub.co/assets/logos/vidhub-icon-2e5c629f64ced5598a56387d4e3d0c7c.png" 
-              billingAddress
-              shippingAddress
-              description={`Your total is ${cart.total}`}
-              amount={cart.total * 100}
-              token={onToken}
-              stripeKey={KEY}
-            >
-              <Button>CHECKOUT NOW</Button>
-            </StripeCheckout>
+              <Button onClick={makePayment}>CHECKOUT NOW</Button>
           </Summary>
         </Bottom>
       </Wrapper>
