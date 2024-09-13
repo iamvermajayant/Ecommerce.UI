@@ -42,6 +42,7 @@ const Success = () => {
       <p>Order ID: {orderDetails.id}</p>
       <p>{console.log(orderDetails)}</p>
       <p>{console.log(lineItems)}</p>
+
       {/* Render more order details as needed */}
     </div>
   );

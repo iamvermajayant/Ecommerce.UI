@@ -5,11 +5,12 @@ import Cart from "./pages/Cart";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Sucess from "./pages/Success";
 import Success from "./pages/Success";
+import { useSelector } from "react-redux";
+
 
 const App = () => {
-  const user = false;
+  const user = useSelector((state) => state.user.currentUser);
   
   return (
     <div>
